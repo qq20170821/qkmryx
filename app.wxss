@@ -1,0 +1,50 @@
+/**app.wxss**/
+image{
+  display: block;
+}
+/* 顶部设备提示信息 */
+.tip_title{
+  position: fixed;
+  right: 20rpx;
+  top: 20rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  background:rgba(3,197,171,0.64);
+  color: #fff;
+  font-size: 30rpx;
+  border-radius: 30rpx;
+  width: 408rpx;
+}
+.tip_title image{
+  width: 44rpx;
+  height: 14rpx;
+  margin: 0 10rpx;
+}
+/* 没有更多提示 */
+.noMore{
+  width: 100%;
+  text-align: center;
+  height: 60rpx;
+  line-height: 60rpx;
+  color: #999;
+  font-size: 22rpx;
+}
+/* 底部版权信息 */
+.copyWrite{
+  width: 100%;
+  height: 80rpx;
+  line-height: 80rpx;
+  color: #fff;
+  background-color: #ccc;
+  text-align: center;
+  font-size: 30rpx;
+}
+ad{
+  padding: 0 20rpx;
+  margin-bottom: 20rpx;
+  box-sizing: border-box;
+}

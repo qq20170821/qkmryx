@@ -1,0 +1,59 @@
+<!--pages/author/author.wxml-->
+<wxs module="filter" src="../../filter/toWan.wxs"></wxs>
+<!-- 视频作者详情页 -->
+<view id="author">
+<!-- 分享按钮 -->
+  <button class="share" open-type="share">
+    <image src="../../images/share.png"></image>
+    <span>分享</span>
+  </button>
+<!-- 头部作者信息（头像，昵称，视频量，观看量） -->
+  <view class="author-top">
+    <image wx:if="{{authorInfo.avatarUrl}}" src="{{imgUrl+authorInfo.avatarUrl}}"></image>
+    <view class="author-name">{{authorInfo.nickname}}</view>
+    <view class="video-number">
+      <p>作者有<span>{{authorInfo.video_num}}</span>个视频</p>
+      <p>.</p>
+      <p><span>{{play_num}}</span>观看</p>
+    </view>
+  </view>
+  <!-- 视频封面列表（封面图片，标题，作者信息） -->
+  <block wx:for="{{authorVideo}}" wx:key="item.id">
+    <view class="author-product" bindtap="toDetail" data-id="{{item.id}}">
+      <view class="pro-left">
+      <!-- 封面图 -->
+        <block wx-if="{{item.images}}">
+          <image src="{{imgUrl+item.images}}"></image>
+        </block>
+        <block wx:else>
+          <image src="{{item.video_info.detail.fm}}"></image>
+        </block>
+        <view class="pro-center">
+        <!-- 标题 -->
+        <view>{{item.title}}</view>
+        <!-- 作者信息（头像，昵称） -->
+        <view class="imgName">
+          <image src="{{imgUrl+item.avatarUrl}}"></image>
+          <span>{{item.nickname}}</span>
+        </view>
+        <!-- 播放量，视频量 -->
+        <view class="lookUser-number">
+          <image src="../../images/user-ccc.png"></image>
+          <span>{{filter.toWan(item.play_number)}}观看</span>
+        </view>
+
+      </view>
+
+      </view>
+
+    
+      <!-- 播放按钮 -->
+      <view class="pro-right">
+        <view><image src="../../images/play.png"></image></view>
+        <view>{{filter.toMinute(item.video_info.detail.time)}}</view>
+      </view>
+
+    </view>
+  </block>
+  <view class="noMore" wx:if="{{noMore}}">没有更多视频了~</view>
+</view>

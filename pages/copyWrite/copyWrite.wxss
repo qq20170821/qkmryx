@@ -1,0 +1,21 @@
+/* pages/copyWrite/copyWrite.wxss */
+.box{
+  padding: 0 20rpx;
+  font-size: 32rpx;
+}
+.title{
+  font-size: 38rpx;
+  font-weight: bold;
+  text-align: center;
+  padding: 50rpx 0;
+}
+.p1,.p2{
+  text-indent: 2em;
+  line-height: 50rpx;
+  word-break:break-all;
+}
+.right{
+  text-align: right;
+  padding: 30rpx 0;
+  font-weight: bold;
+}

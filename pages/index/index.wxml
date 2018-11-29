@@ -1,0 +1,31 @@
+<!--index.wxml-->
+<wxs module="filter" src="../../filter/toWan.wxs"></wxs>
+<view class='tip_title' wx:if="{{tip}}">点击<image src="../../images/dian.png"/>{{tip_title}}</view>
+<block wx:for="{{videoList}}" wx:key="{{item.id}}">
+  <view class="video" bindtap='goDetail' data-id="{{item.id}}">
+    <!-- 视频背景图片 -->
+    <view class='video_bg' style="{{item.images?'background-image:url('+app.imgUrl+item.images+')':'background-image:url('+item.video_info.detail.fm+')'}}">
+    </view>
+    <!-- 视频标题 -->
+    <view class='video_title'>{{item.title}}</view>
+    <!-- 视频播放按钮 -->
+    <view class='video_play_icon'>
+      <image src="../../images/playc.png"/>
+    </view>
+    <!-- 视频信息 -->
+    <view class='video_info'>
+      <view class='video_playNum'>
+        <image src="../../images/user-white.png"/>
+        <span>{{filter.toWan(item.play_number)}}观看</span>
+        <image wx:if="{{index<4}}" class="hotImg" src="../../images/hot.png"/>
+      </view>
+      <view class='video_time'>{{filter.toMinute(item.video_info.detail.time)}}</view>
+    </view>
+  </view>
+  <!-- 作者信息 -->
+  <view class="author_info" bindtap='goAuthor' data-uid="{{item.uid}}">
+    <image src="{{imgUrl+item.avatarUrl}}"/>
+    <span>{{item.nickname}}</span>
+  </view>
+</block>
+<view class='noMore' wx:if="{{noMore_tips}}">没有更多视频了~</view>

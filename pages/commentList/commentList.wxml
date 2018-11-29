@@ -1,0 +1,24 @@
+<!--pages/Single/Single.wxml-->
+<view class=''>
+    <view class='total'>
+       <text>全部{{comNum}}条评论</text>
+    </view>
+    <view class='comment'>
+       <ul class='single_ul'>
+          <li wx:for="{{commentList}}" wx:key="{{index}}" >
+            <view class='img_box'>
+              <image class='head_img' src='../../images/headimg.png'></image>
+            </view>
+            <view class='message_box'>
+              <view class='title'><text>游客</text></view>
+              <view class='content'><text>{{item.content}}</text></view>
+              <view class='time'>
+                <text class='log_time'>{{item.addTime}}</text>
+              </view>
+            </view>
+          </li>
+       </ul>
+    </view>
+
+    <view class='noMore' wx:if="{{noMore}}">没有更多评论了~</view>
+</view>

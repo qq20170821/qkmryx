@@ -1,0 +1,141 @@
+<!--index.wxml-->
+<wxs module="filter" src="../../filter/toWan.wxs"></wxs>
+
+<view id="container">
+  <!-- 固定在顶部的提示信息 安卓 ios-->
+    <view wx:if="{{openFixed}}" class="fixed">
+      <view class='fixed-left'>
+        <span>方便下次观看点击</span>
+        <image class="dian_red" src="../../images/dian_red.png"/>
+        <span>,{{tip_title}}</span>
+        <image class='add' src="../../images/handle.gif"/>
+      </view>
+      <view class="fixed-right">
+        <span bindtap="closeFixed"><image src="../../images/x.png"/></span>
+      </view>
+    </view>
+    <view class="null_div" wx:if="{{openFixed}}"></view>
+<!-- 视频标题 -->
+  <view class="title">
+    <view v-if="{{video.list.title}}">{{video.list.title}}</view>
+  </view>
+<!-- 视频 （填充，带封面图）-->
+  <video class="myVideo" src="{{video.list.video_info.detail.url}}" objectFit="contain" autoplay  page-gesture bindended="end">
+
+    
+  </video>
+  <!-- 作者信息（头像，昵称，多少个视频，观看量） -->
+  <view class="authorInfo">
+    <view class="authorInfo-left" bindtap="toAuthor" data-uid="{{video.list.uid}}">
+      <image wx:if="{{video.list.avatarUrl}}" src="{{imgUrl+video.list.avatarUrl}}"/>
+      <view class="author">
+        <view class="nickname">{{video.list.nickname}}</view>
+        <view class="proInfo">
+          <span>{{video.comNum}}</span>个视频
+          <span>  </span>
+          <span>{{play_number}}</span>观看
+        </view>
+      </view>
+    </view>
+    <!-- 分享功能（按钮） -->
+    <view class="authorInfo-right">
+      <!-- <image class="biu" src='../../images/biu.gif'></image> -->
+      <button class="share" open-type="share">
+        <image src="../../images/share.png"/>
+        <span>分享</span>
+      </button>
+    </view>
+  </view>
+  <!-- 提示分享信息 -->
+  <view class='share_tips'>
+    <image src="../../images/share_tips.gif"/>
+    <image src="../../images/big_handle.gif"/>
+  </view>
+  <!-- 点赞，评论 -->
+  <!-- <view class='startComment'>
+    <view class='start' wx:if="{{start}}" bindtap='addStart'>
+      <image src="../../images/start.png"/>
+      <span>点赞</span>({{startNum}})
+    </view>
+    <view class='start' wx:if="{{!start}}">
+      <image src="../../images/started.png"/>
+      <span>已点赞</span>({{startNum}})
+    </view>
+    <view class='hr'></view>
+    <view class='comment' bindtap='comment'>
+       <image src="../../images/comment.png"/>
+       <span>评论</span>
+    </view>
+  </view> -->
+
+<!-- 随机视频列表 -->
+ <view class="left-title">
+    <view class='left-title-l'>
+      <span></span>
+      <span>热门推荐</span>
+    </view>
+  </view>
+
+  
+  <!-- 视频封面级标题作者信息列表 -->
+  <block wx:for="{{videoList}}" wx:key="item.id">
+    <view class="author-product" bindtap="toNowPage" data-id="{{item.id}}">
+    <!-- 视频封面 -->
+        <view class="pro-left">
+    <!-- 封面图 -->
+          <view class='video_bg' style="{{item.images?'background-image:url('+app.imgUrl+item.images+')':'background-image:url('+item.video_info.detail.fm+')'}}">
+    </view>
+          <!-- <image wx:if="{{item.images}}" src="{{imgUrl+item.images}}"/>
+          <image wx:else src="{{item.video_info.detail.fm}}"/> -->
+    <!-- 视频标题，作者昵称，头像，视频量，播放量  -->
+          <view class="pro-center">
+          <view>{{item.title}}</view>
+          <view class="imgName" bindtap="toAuthor" data-uid="{{item.uid}}">
+            <image wx:if="{{item.avatarUrl}}" src="{{imgUrl+item.avatarUrl}}"></image>
+            <span>{{item.nickname}}</span>
+          </view>
+          <view class="lookUser-number">
+            <image src="../../images/user-ccc.png"></image>
+            <span>{{filter.toWan(item.play_number)}}观看</span>
+          </view>
+        </view>
+      </view>
+
+    
+<!-- 播放按钮，时长 -->
+        <view class="pro-right">
+          <view><image src="../../images/play.png"></image></view>
+          <view>{{filter.toMinute(item.video_info.detail.time)}}</view>
+        </view>
+
+    </view>
+  </block>
+
+  <!-- 没有信息提示 -->
+    <view class="noMore" wx:if="{{noMore}}">没有更多视频了~</view>
+
+    <view class="copyWrite" bindtap='copyWrite'>版权声明</view>
+
+</view>
+<view class='zz' wx:if="{{reply}}"></view>
+<!-- 弹出评论框 -->
+<view class="reply" wx:if="{{reply}}">
+<view class="close" bindtap='close'>X</view>
+  <view class='row1'>
+    {{video.list.title}}
+  </view>
+  <view class='row2'>
+      <!-- 评论 -->
+    <form bindsubmit="formSubmit" report-submit>
+      <view class='reply_main'>
+        <textarea fixed="true" id="txt" name="content" placeholder='留下你的精彩评论吧......' minlength="{{min}}" maxlength="{{max}}" bindinput="inputs" value="{{content}}">
+            <text class='currentWordNumber'>{{currentWordNumber|0}}/{{max}}</text>
+        </textarea>
+      </view>
+      <button formType="submit" bindtap='sendComment'>评论</button>
+    </form>
+  </view>
+  <view class='row3' bindtap='lookMore'>查看更多评论</view>
+</view>
+
+

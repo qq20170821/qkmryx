@@ -1,0 +1,41 @@
+<!--pages/imgt/imgt.wxml-->
+<wxs module="filter" src="../../filter/toWan.wxs"></wxs>
+<!-- 轮播图 -->
+<!-- <ad unit-id="adunit-430ddb50ef629377"></ad> -->
+<!-- <ad unit-id="adunit-978f45709100f44d"></ad>
+<ad unit-id="adunit-b0aca772b2a6195e"></ad>
+<ad unit-id="adunit-b0aca772b2a6195e"></ad> -->
+<!-- <swiper indicator-dots="{{indicatorDots}}"
+  autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular indicator-color="#666" indicator-active-color="#fff">
+  <block wx:for="{{imgUrlsTitle}}" wx:key="{{item.index}}">
+    <swiper-item bindtap="toImgDetail" data-id="{{item.id}}" data-url="{{item.img}}">
+      <image src="{{item.img}}" class="slide-image"/>
+      <view class="swiper_title">{{item.title}}</view>
+      <view class='test'></view>
+    </swiper-item>
+  </block>
+</swiper> -->
+<view id="imgt">
+<!-- 顶部根据设备弹出的提示信息 -->
+  <view class='tip' wx:if="{{tip}}">
+    <span>点击</span>
+    <image src="../../images/dian.png"/>
+    <span>{{tip_title}}</span>
+  </view>
+<!-- 中间图文部分内容 -->
+ 
+  <block wx:for="{{imgt}}" wx:key="{{item.id}}">
+    <view class="box" bindtap="toImgDetail" data-id="{{item.id}}" data-url="{{item.cover}}">
+      <view class="box-main">
+        <view wx:if="{{item.title}}" style="background-image:url('{{item.cover}}');background-size:cover;background-position:center;height:100%;border-radius:28rpx;"></view>
+        <view class="title">{{item.title}}</view>
+      </view>
+    </view>
+    <!-- <ad wx:if="{{!((index+1)%4)}}"unit-id="adunit-430ddb50ef629377"></ad> -->
+  </block>
+  
+  <!-- 换一批 固定在右底部-->
+  <image class='change' bindtap="change" src="../../images/change.png"/>
+<!-- 底部没有更多提示 -->
+<view class="noMore" wx:if="{{noMore}}">没有更多信息了~</view>
+</view>

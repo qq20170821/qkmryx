@@ -1,0 +1,48 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/imgt/imgt",
+    "pages/aboutMe/aboutMe",
+    "pages/detail/detail",
+    "pages/imgtDetail/imgtDetail",
+    "pages/author/author",
+    "pages/copyWrite/copyWrite",
+    "pages/commentList/commentList"
+  ],
+  "window": {
+    "navigationBarTitleText": "趣看每日一笑",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTextStyle": "black",
+    "enablePullDownRefresh": true
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "视频",
+        "iconPath": "images/1.png",
+        "selectedIconPath": "images/11.png"
+      },
+      {
+        "pagePath": "pages/imgt/imgt",
+        "text": "图文",
+        "iconPath": "images/3.png",
+        "selectedIconPath": "images/33.png"
+      },
+      {
+        "pagePath": "pages/aboutMe/aboutMe",
+        "text": "我的",
+        "iconPath": "images/3.png",
+        "selectedIconPath": "images/33.png"
+      }
+    ],
+    "borderStyle": "white",
+    "color": "#999",
+    "selectedColor": "#06b5c1"
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "downloadFile": 10000
+  },
+  "debug": true
+}

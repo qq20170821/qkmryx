@@ -1,0 +1,139 @@
+<wxs module="filter" src="../../filter/toWan.wxs"></wxs>
+<view id="imgtDetail">
+  <view class="imgtTop">
+    <!-- 标题 -->
+    <view class="imgtTop-title">{{imgtTopInfo.title}}</view>
+    <!-- 作者信息 -->
+    <view class="author-info">
+    <!-- 左边作者信息 -->
+      <view class='author-info-left'>
+        <view class='author-info-left-l'>
+          <image wx:if="{{imgtTopInfo.avatarUrl}}" src="{{imgUrl+imgtTopInfo.avatarUrl}}"/>
+          <span>{{imgtTopInfo.nickname}}</span>
+        </view>
+        <view wx:if="{{imgtTopInfo.title}}" class='author-info-left-r'>
+          <image src="../../images/user-ccc.png"/>
+          <span>{{play_number}}阅读</span>
+        </view>
+      </view>
+      <!-- 右边分享按钮 -->
+      <view class='author-info-right' wx:if="{{imgtTopInfo.title}}">
+        <button open-type='share'>
+          <image src="../../images/share.png"/>
+          <span>分享</span>
+        </button>
+      </view>
+    </view>
+    <!-- 固定在顶部的提示信息 安卓 ios-->
+    <view wx:if="{{openFixed}}" class="fixed">
+      <view class='fixed-left'>
+        <span>方便下次阅读,点击</span>
+        <image class="dian_red" src="../../images/dian_red.png"/>
+        <span>{{tip_title}}</span>
+        <image class='add' src="../../images/handle.gif"/>
+      </view>
+      <view class="fixed-right">
+        <span bindtap="closeFixed"><image src="../../images/x.png"/></span>
+      </view>
+    </view>
+  </view>
+<!-- <ad unit-id="adunit-430ddb50ef629377"></ad> -->
+<!-- wxparser -->
+<view class='rich'>
+  <rich-text wx:if="{{richText}}" nodes="{{richText}}"></rich-text>
+  <view class="loading" wx:else>
+    <image src="../../images/loading.gif"/>
+  </view>
+</view>
+<image wx:if="{{richText}}" class="ddd" src="../../images/ddd.gif"/>
+  <!-- 点赞，评论 -->
+  <view class='startComment' wx:if="{{richText}}">
+    <view class='start' wx:if="{{start}}" bindtap='addStart'>
+      <image src="../../images/start.png"/>
+      <span>点赞</span>({{startNum}})
+    </view>
+    <view class='start' wx:if="{{!start}}">
+      <image src="../../images/started.png"/>
+      <span>已点赞</span>({{startNum}})
+    </view>
+    <view class="ddd_share">
+     <button open-type='share'>
+          <image src="../../images/share_blue.png"/>
+          <span>分享</span>
+        </button>
+    </view>
+    <view class='comment' bindtap='comment'>
+       <image src="../../images/comment.png"/>
+       <span>评论</span>
+    </view>
+  </view>
+<!-- <ad unit-id="adunit-430ddb50ef629377"></ad> -->
+<!-- 随机图文列表 -->
+ <view class="left-title">
+    <view class='left-title-l'>
+      <span></span>
+      <span>热门推荐</span>
+    </view>
+ </view>
+ <!-- 列表数据 -->
+<block wx:for="{{imgtList}}" wx:key="{{item.id}}">
+  <view class="box" bindtap="toImgDetail" data-id="{{item.id}}">
+      <view class="box-main">
+        <image wx:if="{{item.cover}}" src="{{item.cover}}"/>
+        <image wx:else src="../../images/video-bg.png"/>
+        <view class="title">{{item.title}}</view>
+      </view>
+  </view>
+  <!-- <ad wx:if="{{!((index+1)%4)}}"unit-id="adunit-430ddb50ef629377"></ad> -->
+</block>
+<!-- 没有更多提示 -->
+  <view class="noMore" wx:if="{{noMore}}">没有更多了~</view>
+<!-- 版权声明 -->
+  <view wx:if="{{richText}}" class="copyWrite" bindtap='copyWrite'>版权声明</view>
+
+</view>
+<!-- message弹框,监听页面滑动，出现，三秒后隐藏-->
+  <view class="mess" wx:if="{{showMess}}">
+    <image src='../../images/mess.png'></image>
+    <view class="view-text">
+      <view>如果觉得不错</view>
+      <view>转发给好友吧</view>
+    </view>
+  </view>
+
+  <!-- 固定转发按钮 -->
+  <button class='share' open-type='share'>
+    <image src="../../images/share.png"/>
+    <span>分享给好友或者微信群</span>
+  </button>
+<!-- 全屏遮罩 -->
+<view class='zz' wx:if="{{reply}}"></view>
+<!-- 弹出评论框 -->
+<view class="reply" wx:if="{{reply}}">
+<view class="close" bindtap='close'>X</view>
+  <view class='row1'>{{imgtTopInfo.title}}</view>
+  <view class='row2'>
+      <!-- 评论 -->
+    <form bindsubmit="formSubmit" report-submit>
+      <view class='reply_main'>
+        <textarea fixed="true" id="txt" name="content" placeholder='留下你的精彩评论吧......' minlength="{{min}}" maxlength="{{max}}" bindinput="inputs" value="{{content}}">
+            <text class='currentWordNumber'>{{currentWordNumber|0}}/{{max}}</text>
+        </textarea>
+      </view>
+      <button formType="submit" bindtap='sendComment'>评论</button>
+    </form>
+
+  </view>
+  <view class='row3' bindtap='lookMore'>查看更多评论</view>
+</view>
+
+
+
+<!-- 无脑转发弹窗 -->
+<view class='nofaceZz' wx:if="{{nofaceShare}}"></view>
+<view class='nofaceShare' wx:if="{{nofaceShare}}">
+  <view class='nofaceShare_title'>
+    点击“分享”把文本转发<br/>给好友或微信群!
+  </view>
+  <button open-type='share'>分享</button>
+</view>

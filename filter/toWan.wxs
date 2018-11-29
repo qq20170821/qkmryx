@@ -1,0 +1,29 @@
+ // 点击量转化，超过10000转化为万单位
+function toWan(x){
+  if (x.toString().length > 4) {
+    x = (x / 10000).toFixed(2);
+    var y = x + "万";
+    return y;
+  }else{
+    return x;
+  }
+}
+// js将秒转换为 分: 秒 函数
+function toMinute(s){
+  //分
+  var h;
+  h=Math.floor(s/60);
+  //秒
+  s=s%60;
+  //将变量隐式转换为字符串
+  h += '';
+  s += '';
+  //如果只有一位数，前面增加一个0
+  h = (h.length == 1) ? '0' + h : h;
+  s = (s.length == 1) ? '0' + s : s;
+  return h + ':' + s;
+}
+module.exports = {
+  toWan: toWan,
+  toMinute: toMinute
+}
